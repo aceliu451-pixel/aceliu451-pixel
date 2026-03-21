@@ -1,118 +1,109 @@
 ## Hi there 👋
 
-# AI 本地化与技术文档作品集
-# AI Localization & Technical Documentation Portfolio
+Technical Writer specializing in cloud / API / bilingual documentation.
 
-**刘 [姓名]** · 本地化工程师 / 技术文档工程师  
-**Liu [Name]** · Localization Engineer / Technical Writer  
-📍 北京 / 上海 · 📧 your.email@gmail.com
+技术文档工程师，专注云计算、API与中英双语文档。
 
 ---
 
-## 我做什么 / What I Do
+## About Me / 关于我
 
-我构建 **AI驱动的本地化质量体系**，服务于云计算产品文档（中译英）——不是简单翻译，而是工程化的质量管理系统。
+Technical Writer at ByteDance · Volcengine Cloud. I write API docs, developer guides, and UI documentation. I also build AI-powered tools to improve documentation and localization workflows.
 
-I build **AI-powered localization systems** for cloud product documentation (CN→EN) — engineered for measurable quality, not just translated.
-
-核心方向：中译英技术文档 · LLM流水线设计 · 翻译质量工程 · 技术写作 · UI文案治理
-
-Core work: CN→EN localization · LLM pipeline design · Translation QA engineering · Technical writing · UI copy governance
+双语技术文档工程师。日常负责 API 文档、开发者文档与 UI 文档编写，同时构建 AI 工具来优化文档与本地化流程。
 
 ---
 
-## 核心项目 / Featured Project
+## Projects / 项目展示
 
-### [localization-agent](https://github.com/[username]/localization-agent) — AI 本地化流水线 / AI Localization Pipeline
+### 🔄 [Translation Agent](agent/translation-agent/)
 
-将手工中译英本地化流程升级为**可度量、可自动化的AI质量体系**，覆盖云计算产品文档与控制台UI文案。
+汉译英技术文档翻译 Agent，模拟人类翻译工作流。
 
-A 5-node LLM pipeline that transforms manual CN→EN localization into a measurable, automated quality system for cloud technical documentation and UI copy.
-
-**流水线架构 / Pipeline**
+An autonomous CN→EN translation agent that mirrors a human translator's workflow.
 
 ```
-源文本 CN → 实体分析 → 直译 → 逻辑重构 → 风格应用 → 质量检测 → 最终译文 + QA报告
-Source CN → Analyzer → Translator → Refactor → Style → QA Guard → Final EN + QA Report
+源文本 → TM匹配 → 术语查询 → 初译 → 质检 → 优化(最多3轮) → 交付 + TM回写
+Source → TM Match → Term Lookup → Draft → QA → Optimize(up to 3x) → Deliver + TM Writeback
 ```
 
-**成果指标 / Results**
+- Prompt 分层设计（翻译 / 质检 / 优化）
+- 术语表 + TM 库运行时注入
+- 人工审校闭环 + TM 自动回写
+- Stack: Python · OpenAI API · Prompt Engineering
 
-| 指标 / Metric | 结果 / Result |
-|---|---|
-| 免修率 · Post-edit-free rate | ~80% |
-| 人工审校吞吐量 · Human review throughput | ~900 字/小时 · chars/hr |
-| 术语类QA问题减少 · Terminology QA failures reduced | ~40% |
-| 流水线节点数 · Pipeline nodes | 5 |
-
-**关键工程决策 / Key Engineering Decisions**
-
-- **节点级Prompt模板** — 每个节点独立的 `.md` 模板，独立版本控制，而非一个超长Prompt  
-  One prompt template per node, independently versioned — not a single mega-prompt
-- **运行时术语库注入** — `config/termbase.json` 热替换，无需修改代码  
-  Runtime termbase injection via `config/termbase.json` — hot-swappable without code changes
-- **JSON状态对象** — 完整中间链路记录，不依赖LLM短期记忆  
-  JSON state object carries full intermediate trace — no LLM memory dependency
-- **节点级温度调优** — QA节点 `0.0` 保证确定性，重构节点 `0.2` 保留弹性  
-  Per-node temperature tuning (QA at `0.0` for determinism, refactor at `0.2`)
-- **生产级健壮性** — 自动重试（3次）+ JSON解析容错  
-  Retry logic (3×) + JSON parse fallback for production resilience
-
-**技术栈 / Stack:** Python · DeepSeek API · Prompt Engineering · JSON
+> **痛点：** 人工逐句翻译效率低，术语不一致，译文质量依赖个人经验，难以规模化复用。
+> **解决：** 构建自动化翻译流水线，内置术语表注入、多轮质检与 TM 回写，实现可审计、可迭代的标准化流程。
+> **业务价值：** 显著降低人工逐句翻译校对的人力成本，缩短任务交付周期，术语一致性从人工把控升级为系统保障。
 
 ---
 
-## 能力范围 / Capability Areas
+### 📝 [Doc Generator](agent/doc-generator/)
 
-**本地化质量工程 / Localization Quality Engineering**  
-本地化QA（LQA）· 机器翻译后编辑（MTPE）· 免修率追踪 · 根因分析（RCA）· 错误分类体系设计 · 术语一致性管理  
-LQA · MTPE · Post-edit-free rate tracking · Root cause analysis (RCA) · Error taxonomy · Terminology management
+从非结构化草稿自动生成标准化技术文档。
 
-**AI与流水线 / AI & Pipeline**  
-LLM API集成 · 多步Prompt链路设计 · 多节点流水线编排 · 质量指标设计 · 自动化风险标注  
-LLM API integration · Prompt chain design · Multi-node pipeline orchestration · Quality metric design · Automated risk flagging
+Generates standardized technical documentation from unstructured drafts.
 
-**技术文档 / Technical Documentation**  
-云计算产品中译英文档 · API文档 · UI文案 · 帮助中心 · 发布说明 · 风格规范应用  
-CN→EN cloud docs · API documentation · UI copy · Help center · Release notes · Style guide application
+- 自动提取关键信息（术语、参数、步骤）
+- 基于模板生成结构化文档
+- 术语表一致性校验
+- Stack: Python · LLM API
 
-**工具 / Tools**  
-Python · DeepSeek / OpenAI API · Git · TMS平台 · VS Code
+> **痛点：** 研发提供的输入零散、格式不统一，技术写作者需反复手动整理排版，术语使用因人而异。
+> **解决：** 自动提取关键信息并基于模板生成结构化文档，内置术语表校验，一键输出标准化内容。
+> **业务价值：** 消除重复排版与术语不一致问题，将非结构化输入到标准文档的产出效率提升数倍。
 
 ---
 
-## 质量框架 / QA Framework
+### 📊 [AI QA Workflow Case Study](aceliu451-pixel/case-studies/ai-qa-workflow-case/)
 
-翻译错误按三类分类，每类错误驱动对应的Prompt迭代方向：
+AI 驱动的 MTPE 质检工作流完整案例，从问题定义到落地复盘。
 
-Translation errors are classified into three categories, each driving specific prompt iteration:
+A complete case study of an AI-driven QA workflow for improving MTPE exemption rate.
 
-| 错误类型 / Error Type | 定义 / Definition | 修复方案 / Fix Applied |
-|---|---|---|
-| 术语错误 · Terminology | 领域术语翻译错误 · Wrong domain term | 术语库注入 + 重构节点强制执行 · Termbase injection + refactor enforcement |
-| 格式错误 · UI Format | 大小写/标点违规 · Capitalization / punctuation violations | 风格节点规则：句首大写，标签无标点 · Style node: sentence case, no period on labels |
-| 语义错误 · Semantic | 含义改变或主宾倒置 · Meaning changed or subject inverted | 分析节点标注实体类型 → 重构节点结构化修复 · Analyzer flags entity → refactor restructures |
+8-step documentation:
 
-完整根因分析样本与QA案例详见案例文档，可按需提供。  
-Full RCA samples and QA case studies available in the case study document — contact to request.
+| Step | Content |
+|------|---------|
+| 01 | Problem Statement — 问题陈述 |
+| 02 | Solution Design — 方案设计 |
+| 03 | Workflow Architecture — 流程架构 |
+| 04 | Prompt Engineering — 提示词工程 |
+| 05 | Quality Metrics — 质量指标 |
+| 06 | Case Study: Exemption Rate — 免审率案例 |
+| 07 | Root Cause Analysis — 根因分析 |
+| 08 | Lessons Learned — 经验总结 |
 
----
+Key result: ~80% post-edit-free rate · 核心成果：约80%免修率
 
-## 知识库资产 / Knowledge Base Assets
-
-**动态术语库 / Terminology Database** — JSON格式，运行时注入，无需人工干预即可保障术语一致性  
-Dynamic JSON, runtime-injected, enforces consistency without manual review
-
-**高频句式库 / Sentence Pattern Library** — 中译英技术文档高频表达，对标AWS等云厂商规范  
-High-frequency CN→EN technical expressions aligned to AWS / cloud vendor standards
-
-**Prompt规则集 / Prompt Rule Set** — 5条核心约束规则，每条针对一类高频错误，源自真实RCA积累  
-5 core constraint rules derived from RCA, each targeting a specific recurring error class
+> **痛点：** 人工全量审校成本高、主观性强，难以及时识别高频错误并沉淀可复用的质量规则。
+> **解决：** 搭建结构化 AI 质检工作流，将问题定义、流程设计、提示词工程、质量指标与 RCA 串成闭环。
+> **业务价值：** 用可复用的 AI 质检机制替代人工全量审校，将免修率提升至 80%，大幅释放审校人力。
 
 ---
 
-## 联系方式 / Contact
+### 🌐 [MkDocs Portfolio Site](mkdoc/)
 
-📧 your.email@gmail.com  
-完整案例文档（流水线架构 · QA框架 · 根因分析样本 · 知识库）可按需提供。  
-Full case study document (pipeline architecture · QA framework · RCA samples · knowledge base) available on request.
+基于 MkDocs + GitHub 的 docs-as-code 文档站，包含 API 文档样例与用户指南样例。
+
+Documentation site built with MkDocs, featuring API doc samples and user guide samples.
+
+> **痛点：** 文档散落在本地或 Wiki 中，缺乏版本管理，多人协作时变更难追溯、发布流程不可控。
+> **解决：** 基于 MkDocs + GitHub 实现 docs-as-code，文档纳入 Git 版本控制，变更可审查、可回滚。
+> **业务价值：** 实现版本可控、协作可追溯的文档发布流程，降低多人协作中的信息丢失与版本冲突风险。
+
+---
+
+## Skills / 技能
+
+**Writing:** API docs · Developer guides · UI docs · Bilingual (ZH/EN)
+
+**AI + Automation:** LLM pipeline design · Prompt engineering · Translation QA · Doc generation
+
+**Tools:** Python · MkDocs · Git/GitHub · TMS
+
+---
+
+## Contact / 联系
+
+📧 ace451@gmail.com
