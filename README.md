@@ -16,25 +16,26 @@ Technical Writer at ByteDance · Volcengine Cloud. I write API docs, developer g
 
 ## Projects / 项目展示
 
-### 🔄 [Translation Agent](agent/translation-agent/)
+### 🔄 [Translation Agent](https://github.com/aceliu451-pixel/translation-agent)
 
-汉译英技术文档翻译 Agent，模拟人类翻译工作流。
+汉译英技术文档翻译 workflow，结合术语注入、QA 循环、人工审校与 TM 回写。
 
-An autonomous CN→EN translation agent that mirrors a human translator's workflow.
+AI-assisted CN→EN technical documentation workflow with glossary injection, QA loops, human review, and TM writeback.
 
 ```
-源文本 → TM匹配 → 术语查询 → 初译 → 质检 → 优化(最多3轮) → 交付 + TM回写
-Source → TM Match → Term Lookup → Draft → QA → Optimize(up to 3x) → Deliver + TM Writeback
+源文本 → TM匹配 → 术语查询 → 初译 → 质检 → 优化(最多3轮) → 人工审校 → TM回写
+Source → TM Match → Term Lookup → Draft → QA → Optimize(up to 3x) → Human Review → TM Writeback
 ```
 
 - Prompt 分层设计（翻译 / 质检 / 优化）
 - 术语表 + TM 库运行时注入
 - 人工审校闭环 + TM 自动回写
 - Stack: Python · OpenAI API · Prompt Engineering
+- Result: zero-edit rate 20.0% → 80.0% · acceptable rate 70.0% → 100.0%
 
 > **痛点：** 人工逐句翻译效率低，术语不一致，译文质量依赖个人经验，难以规模化复用。
 > **解决：** 构建自动化翻译流水线，内置术语表注入、多轮质检与 TM 回写，实现可审计、可迭代的标准化流程。
-> **业务价值：** 显著降低人工逐句翻译校对的人力成本，缩短任务交付周期，术语一致性从人工把控升级为系统保障。
+> **业务价值：** 通过 prompt 与 QA 迭代，将 zero-edit rate 从 20.0% 提升到 80.0%，并将 needs-fix rate 从 30.0% 降至 0.0%。
 
 ---
 
